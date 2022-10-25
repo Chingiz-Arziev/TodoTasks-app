@@ -1,20 +1,22 @@
 <template>
-    <q-layout class="justify-center row">
-      <q-page-container class="justify-center row">
-        <div class="text-h3">ONLINE SHOP</div>
-        <v-catalog/>
-        <v-cart/>
-      </q-page-container>
-    </q-layout>
+
+    <div class="justify-center row">
+      <v-header/>
+      <v-catalog/>
+    </div>
+      <v-cart/>
+
 </template>
 
 <script>
+import vHeader from './v-header'
 import vCatalog from './v-catalog.vue'
 import vCart from './v-cart.vue'
 
 export default {
   name: "v-main-wrapper",
   components: {
+    vHeader,
     vCatalog,
     vCart,
   }

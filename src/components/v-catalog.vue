@@ -1,86 +1,41 @@
 <template>
-  <q-layout class="justify-center row items-center">
-    <q-page-container class="column items-center">
-      <div class="text-h4">CATALOG</div>
-      <div class="row">
-        <v-catalog-item
-            v-for="product in products"
-            :key="product.article"
-            :product-data="product"
-            @sendArticle="check"
-        />
-      </div>
-
-    </q-page-container>
-  </q-layout>
+ <div class="justify-center row" style="max-width: 1440px;">
+    <div class="text-h4 q-pa-lg">CATALOG</div>
+    <div class="row">
+      <v-catalog-item
+          v-for="product in PRODUCTS"
+          :key="product.article"
+          :product-data="product"
+          @sendArticle="check"
+      />
+    </div>
+ </div>
 </template>
 
 <script>
 import vCatalogItem from './v-catalog-item'
+import {mapActions, mapGetters} from 'vuex'
+
 export default {
   name: "v-catalog",
   components: {
     vCatalogItem
   },
   data() {
-    return {
-      products: [
-        {
-          image: "1.jpg",
-          name: "T-shirt 1",
-          price: 2100.234234234,
-          article: "T1",
-          available: true,
-          category: "Мужские"
-        },
-        {
-          image: "2.jpg",
-          name: "T-shirt 2",
-          price: 3150.12312412,
-          article: "T2",
-          available: true,
-          category: "Женские"
-        },
-        {
-          image: "3.jpg",
-          name: "T-shirt 3",
-          price: 4200.51524,
-          article: "T3",
-          available: false,
-          category: "Женские"
-        },
-        {
-          image: "4.jpg",
-          name: "T-shirt 4",
-          price: 5300.1245512,
-          article: "T4",
-          available: true,
-          category: "Мужские"
-        },
-        {
-          image: "5.jpg",
-          name: "T-shirt 5",
-          price: 6500.3522314,
-          article: "T5",
-          available: false,
-          category: "Женские"
-        },
-        {
-          image: "6.jpeg",
-          name: "T-shirt 6",
-          price: 8700.4124123,
-          article: "T6",
-          available: true,
-          category: "Женские"
-        }
-      ]
-    }
+    return {}
   },
-
   methods: {
-    check(data) {
-      console.log(data)
-    }
+    ...mapActions([
+      'GET_PRODUCTS_FROM_API'
+    ])
+  },
+  computed: {
+    ...mapGetters([
+        "PRODUCTS"
+    ])
+  },
+  mounted() {
+    this.GET_PRODUCTS_FROM_API()
   }
 }
 </script>

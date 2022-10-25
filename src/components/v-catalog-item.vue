@@ -1,17 +1,45 @@
 <template>
-    <div class="q-pa-md no-margin">
-      <q-card class="my-card bg-primary text-white no-margin items-center">
+    <div class="q-pa-md col-3">
+      <q-card class="my-card">
+        <q-img style="height: 200px;" :src="require('../assets/images/' + productData.image)" />
+
         <q-card-section>
-          <img :src=" require('../assets/images/' + productData.image)" alt="">
-          <div class="text-h6">{{productData.name}}</div>
-          <div class="text-subtitle2">{{productData.price.toFixed(2)}} $</div>
+          <q-btn
+              fab
+              color="red"
+              icon="favorite_border"
+              class="absolute"
+              style="top: 0; right: 12px; transform: translateY(-50%);"
+          />
+
+          <div class="row no-wrap items-center">
+            <div class="col text-h6 ellipsis">
+              {{productData.name}}
+            </div>
+            <div class="col-auto text-grey text-caption q-pt-md row no-wrap items-center">
+              <q-icon name="place" />
+              {{productData.article}}
+            </div>
+          </div>
+
+          <q-rating v-model="stars" :max="5" size="32px" class=""/>
         </q-card-section>
 
-        <q-separator dark />
+        <q-card-section class="q-pt-none">
+          <div class="text-subtitle1">
+            $ {{productData.price.toFixed(2)}}
+          </div>
+          <div class="text-caption text-grey">
+            Small plates, salads & sandwiches in an intimate setting.
+          </div>
+        </q-card-section>
+
+        <q-separator />
 
         <q-card-actions>
-          <q-btn @click="sendData" flat>В корзину </q-btn>
-          <q-btn flat>В избранное </q-btn>
+          <q-btn flat color="primary">
+            Add to card
+          </q-btn>
         </q-card-actions>
       </q-card>
     </div>
